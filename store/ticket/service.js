@@ -6,7 +6,6 @@ export default {
     const response = await axios.get(url, {
       params: { filter: { where: { to: code } } },
     })
-    console.log(response)
     return {
       tickets: response,
     }
