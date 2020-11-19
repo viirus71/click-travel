@@ -4,35 +4,35 @@
       <Logo />
     </div>
     <div class="content">
-      <div>
-        <h1 class="title">Choose your dream destination...</h1>
-        <div class="links">
-          <nuxt-link
-            v-for="item in destinations"
-            :key="item.code"
-            :to="'/tickets?code=' + item.code"
-            class="giant-button"
-          >
-            {{ item.name }}
-          </nuxt-link>
-        </div>
+      <div class="links">
+        <a v-for="(item, index) in tickets" :key="index" class="giant-button">
+          Passenger : {{ item.passenger }} <br />
+          Flight : {{ item.flight }} <br />
+          From : {{ item.from }} <br />
+          To : {{ item.to }} <br />
+          Class : {{ item.class }} <br />
+          Gate : {{ item.gate }} <br />
+          Time : Time : Time : {{ item.time }} <br />
+          Set : {{ item.seat }} <br />
+          Number:
+          {{ item.number }}
+        </a>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  async asyncData({ store }) {
-    await store.dispatch('destination/loadDestinations')
+  async asyncData({ store, route }) {
+    await store.dispatch('ticket/loadTickets', route.query.code)
   },
   data() {
     return {}
   },
   computed: mapGetters({
-    destinations: 'destination/getDestinations',
+    tickets: 'ticket/getTickets',
   }),
 }
 </script>
